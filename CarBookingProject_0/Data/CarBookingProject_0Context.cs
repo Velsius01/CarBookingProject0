@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CarBookingProject_0.Domain;
 using CarBookingProject_0.Configurations.Entities;
+using CarBookingProject_0.Domain;
 
 namespace CarBookingProject_0.Data
 {
-    public class CarBookingProject_0Context : DbContext
+    public class CarBookingProject_0Context : IdentityDbContext<CarBookingProject_0User>
     {
-        public CarBookingProject_0Context (DbContextOptions<CarBookingProject_0Context> options)
+        public CarBookingProject_0Context(DbContextOptions<CarBookingProject_0Context> options)
             : base(options)
         {
         }
 
-        public DbSet<CarBookingProject_0.Domain.Feedback> Feedback { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Location> Location { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Payment> Payment { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Promotion> Promotion { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Ride> Ride { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Role> Role { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.User> User { get; set; } = default!;
-        public DbSet<CarBookingProject_0.Domain.Vehicle> Vehicle { get; set; } = default!;
+        public DbSet<Feedback> Feedback { get; set; } = default!;
+        public DbSet<Location> Location { get; set; } = default!;
+        public DbSet<Payment> Payment { get; set; } = default!;
+        public DbSet<Promotion> Promotion { get; set; } = default!;
+        public DbSet<Ride> Ride { get; set; } = default!;
+        public DbSet<Role> Role { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
+        public DbSet<Vehicle> Vehicle { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure precision and scale for decimal properties
             modelBuilder.Entity<Location>()
                 .Property(l => l.Latitude)
-                .HasPrecision(10, 6); // Adjust to your required precision and scale
+                .HasPrecision(10, 6);
             modelBuilder.Entity<Location>()
                 .Property(l => l.Longitude)
                 .HasPrecision(10, 6);
@@ -47,6 +43,7 @@ namespace CarBookingProject_0.Data
                 .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new FeedbackSeed());
             modelBuilder.ApplyConfiguration(new LocationSeed());
             modelBuilder.ApplyConfiguration(new PaymentSeed());
@@ -55,9 +52,7 @@ namespace CarBookingProject_0.Data
             modelBuilder.ApplyConfiguration(new RoleSeed());
             modelBuilder.ApplyConfiguration(new UserSeed());
             modelBuilder.ApplyConfiguration(new VehicleSeed());
-
-
         }
-        
     }
 }
+
