@@ -49,8 +49,8 @@ namespace CarBookingProject_0.Data
             modelBuilder.ApplyConfiguration(new PaymentSeed());
             modelBuilder.ApplyConfiguration(new PromotionSeed());
             modelBuilder.ApplyConfiguration(new RideSeed());
-            modelBuilder.ApplyConfiguration(new RoleSeed());
-            modelBuilder.ApplyConfiguration(new UserSeed());
+            modelBuilder.ApplyConfiguration(new RolesListSeed());
+            modelBuilder.ApplyConfiguration(new UsersListSeed());
             modelBuilder.ApplyConfiguration(new VehicleSeed());
         }
     }

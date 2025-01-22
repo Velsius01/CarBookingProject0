@@ -1,33 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CarBookingProject_0.Domain;
 using System.Drawing;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarBookingProject_0.Configurations.Entities
 {
-    public class RoleSeed : IEntityTypeConfiguration<Role>
+    public class RoleSeed : IEntityTypeConfiguration<IdentityRole>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
             builder.HasData(
-                new Role
-                {
-                    Id = 1,
-                    RoleType = "Driver",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = DateTime.Now,
-                    CreatedBy = "System",
-                    UpdatedBy = "System"
-                },
-                new Role
-                {
-                    Id = 2,
-                    RoleType = "Passenger",
-                    DateCreated = DateTime.Now,
-                    DateUpdated = DateTime.Now,
-                    CreatedBy = "System",
-                    UpdatedBy = "System"
-                }
-        );
+new IdentityRole
+{
+    Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+    Name = "Administrator",
+    NormalizedName = "ADMINISTRATOR"
+},
+new IdentityRole
+{
+    Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+    Name = "User",
+    NormalizedName = "USER"
+}
+);
         }
     }
 }
